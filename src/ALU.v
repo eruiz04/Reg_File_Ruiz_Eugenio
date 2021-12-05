@@ -1,14 +1,16 @@
-module ALU (y, a, b, c_in, select);		 // ARITHMETIC UNIT
+//Pendiente por modificar
+
+module ALU (y, a, b, select);		 // ARITHMETIC UNIT
 output 	[3: 0] 	y;
 input		[3: 0]	a, b;
-input					c_in;
-input		[4: 0]	select;
+//input					c_in;
+input		[2: 0]	select;
 reg		[3: 0]	y;
 
 always @ (*)
 begin
 y= 4'b0;
-case ({select, c_in})
+case ({select})
 6'b00000_0:	y = a;
 6'b00000_1:	y = a + 1'b1;
 6'b00001_0:	y = a + b;

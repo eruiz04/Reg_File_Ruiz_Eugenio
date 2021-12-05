@@ -1,7 +1,16 @@
-module mux2to1 (D0, D1, S, Y);
-output Y;
-input D0, D1, S;
+module mux2to1 #(parameter DW = 32)(
+output reg [DW-1:0] Y,
+input S,
+input [DW-1:0] D0, D1
+);
 
-	assign Y=(S) ? D1:D0;
+always @(S or D1 or D0)
+begin
+
+	if (S)
+	Y = D1;
+	else
+	Y = D0;
+end 
 
 endmodule

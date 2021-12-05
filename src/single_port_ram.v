@@ -2,19 +2,19 @@
 // Single port RAM with single read/write address 
 
 module single_port_ram 
-#(parameter DATA_WIDTH=8, parameter ADDR_WIDTH=6)
+#(parameter DW=32)
 (
-	input [(DATA_WIDTH-1):0] data,
-	input [(ADDR_WIDTH-1):0] addr,
+	input [(DW-1):0] data,
+	input [7:2] addr,
 	input we, clk,
-	output [(DATA_WIDTH-1):0] q
+	output [(DW-1):0] q
 );
 
 	// Declare the RAM variable
-	reg [DATA_WIDTH-1:0] ram[ADDR_WIDTH-1:0];
+	reg [DW-1:0] ram [2*DW-1:0];
 
 	// Variable to hold the registered read address
-	reg [ADDR_WIDTH-1:0] addr_reg;
+	//reg [DW-1:0] addr_reg;
 	
 	/*
 	//Initial conditions
@@ -28,14 +28,15 @@ module single_port_ram
 	begin
 		// Write
 		if (we)
-			ram[addr] <= data;
+			ram[addr[7:2]] <= data;
 
-		addr_reg <= addr;
+		//addr_reg <= addr;
 	end
 
 	// Continuous assignment implies read returns NEW data.
 	// This is the natural behavior of the TriMatrix memory
 	// blocks in Single Port mode.  
-	assign q = ram[addr_reg];
+	
+	//assign q = ram[addr_reg];
 
 endmodule
